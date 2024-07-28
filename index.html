@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сайт с кнопками</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 414px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .top-container {
+            width: 100%;
+            max-width: 414px;
+            background-color: #C0CADA;
+            height: 50px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rectangles-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .rectangle-item {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .rectangle-item img {
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+        }
+
+        .rectangle {
+            width: 70px;
+            height: 25px;
+            background-color: #737373;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .rectangle-button {
+            position: absolute;
+            right: -30px;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .rectangle-button img {
+            width: 25px;
+            height: 25px;
+        }
+
+        .middle-container, .referals-container, .new-container, .mining-container, .tasks-container {
+            width: 100%;
+            max-width: 414px;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            bottom: 100px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .middle-container {
+            background-image: url('https://iimg.su/s/26/qWtdVGZ91aGqaShCAAKoDC7AvXX4279PIxg00gzO.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .bottom-container {
+            width: 100%;
+            max-width: 414px;
+            background-color: #713d1b;
+            height: 100px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 3;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .button-container button {
+            flex: 1;
+            margin: 0 5px;
+            padding: 10px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button-container button img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .button-container button:first-child {
+            margin-left: 0;
+        }
+
+        .button-container button:last-child {
+            margin-right: 0;
+        }
+
+        .middle-container button, .referals-container button, .new-container button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .middle-container button img, .referals-container button img, .new-container button img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var counter = 0;
+            var counterDisplay = document.getElementById('click-counter');
+            var middleButton = document.getElementById('middle-button');
+
+            function formatCounter(value) {
+                if (value >= 1000000) {
+                    return (value / 1000000).toFixed(2) + 'M';
+                }
+                return value;
+            }
+
+            middleButton.addEventListener('click', function () {
+                counter++;
+                counterDisplay.textContent = formatCounter(counter);
+            });
+
+            document.getElementById('referals-button').addEventListener('click', function () {
+                showContainer('referals-container');
+            });
+
+            document.getElementById('oreo-button').addEventListener('click', function () {
+                showContainer('middle-container');
+            });
+
+            document.getElementById('mining-button').addEventListener('click', function () {
+                showContainer('mining-container');
+            });
+
+            document.getElementById('tasks-button').addEventListener('click', function () {
+                showContainer('tasks-container');
+            });
+
+            function showContainer(containerId) {
+                var containers = document.querySelectorAll('.middle-container, .referals-container, .new-container, .mining-container, .tasks-container');
+                containers.forEach(function (container) {
+                    container.style.display = 'none';
+                });
+                document.getElementById(containerId).style.display = 'flex';
+            }
+
+            showContainer('middle-container'); // Показать начальную страницу
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="top-container">
+            <div class="rectangles-container">
+                <div class="rectangle-item">
+                    <img src="https://iimg.su/s/27/g85O17QQdbH5isXYnBXD4BekQISQmTJuF9N1PGCj.png" alt="Image 1">
+                    <div class="rectangle" id="click-counter">0</div>
+                    <button class="rectangle-button" onclick="alert('Button in Rectangle 1 clicked!')">
+                        <img src="https://iimg.su/s/28/O9qox30clmO2ewI2RiOcn1bybVaXceUVfZJkXvQp.png" alt="Button">
+                    </button>
+                </div>
+                <div class="rectangle-item">
+                    <img src="https://iimg.su/s/27/sBpUYNk6ImCTqb6Lq7VPdZxxS7x1UmvUmOO9K1hC.png" alt="Image 2">
+                    <div class="rectangle"></div>
+                    <button class="rectangle-button" onclick="alert('Button in Rectangle 2 clicked!')">
+                        <img src="https://iimg.su/s/28/O9qox30clmO2ewI2RiOcn1bybVaXceUVfZJkXvQp.png" alt="Button">
+                    </button>
+                </div>
+                <div class="rectangle-item">
+                    <img src="https://iimg.su/s/27/Osh55qy26Hw62s88C1csPZDIfLKxvEc8E3GNpqpv.png" alt="Image 3">
+                    <div class="rectangle"></div>
+                </div>
+            </div>
+        </div>
+        <div id="middle-container" class="middle-container">
+            <button id="middle-button">
+                <img src="https://iimg.su/s/27/wxreTumTB3kdiPU2NsGbf9CO0T5EAI1E32uofGdf.png" alt="Central Button">
+            </button>
+        </div>
+        <div id="referals-container" class="referals-container">
+            <p>Referals content goes here.</p>
+        </div>
+        <div id="mining-container" class="mining-container">
+            <p>Mining content goes here.</p>
+        </div>
+        <div id="tasks-container" class="tasks-container">
+            <p>Tasks content goes here.</p>
+        </div>
+        <div class="bottom-container">
+            <div class="button-container">
+                <button id="referals-button"><img src="https://i.postimg.cc/L6TGYmHT/7.png" alt="Referals"></button>
+                <button id="oreo-button"><img src="https://i.postimg.cc/g22Q31jP/9.png" alt="Oreo"></button>
+                <button id="mining-button"><img src="https://i.postimg.cc/tg1cMPFS/6.png" alt="Mining"></button>
+                <button id="tasks-button"><img src="https://i.postimg.cc/PxYRtj31/8.png" alt="Tasks"></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
